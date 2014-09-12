@@ -1,8 +1,17 @@
 $(document).ready(function(){
     $("#hide").click(function(){
-        $("#notify").hide(1000);
+        $("#notify").slideUp(400);
     });
     $("#show").click(function(){
-        $("#notify").show(1000);
+        notify("", "");
+    });
+
+    $("#notify").click(function() {
+        $("#notify").slideUp(400);
     });
 });
+
+var notify = function(icon, text) {
+    $("#notify > .text").replaceWith("tedt");
+    $("#notify").slideDown(400);
+}
