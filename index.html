@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- Metadata -->
+        <title>CMS</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+        <meta charset="utf-8"/>
+        <!-- Load css files -->
+        <link rel="stylesheet" type="text/css" href="css/preloader.css">
+        <link rel="stylesheet" type="text/css" href="css/style.css">
+        <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+        <link rel="stylesheet" type="text/css" href="css/loader.css">
+        <link rel="stylesheet" type="text/css" href="css/font-awesome/css/font-awesome.min.css">
+        <!-- Load javascript files -->
+        <script src="js/jquery-2.1.1.js"></script>
+        <script src="js/loaders.js"></script>
+        <script src="js/bootstrap.min.js"></script>
+        <script src="js/loginhandler.js"></script>
+        <script src="js/notify.js"></script>
+    </head>
+    <body class="loadwait">
+        <!-- loader setup -->
+        <div id="preloader-wrapper">
+            <div id="preloader"></div>
+            <div class="preloader-section"></div>
+        </div>
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div id="loader-txt"></div>
+            <div class="loader-section"></div>
+        </div>
+        <div id="notify">
+            <div class="logo"><i></i></div>
+            <div class="text">gsfg</div>
+        </div>
+        <!-- Navigation Top -->
+        <div id="content">
+            <nav class="navbar navbar-default" role="navigation">
+                <div class="container">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1">
+                            <span class="sr-only">Toggle navigation</span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                        </button>
+                        <a class="navbar-brand" href="#">SmartCMS</a>
+                    </div>
+                    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                        <ul class="nav navbar-nav">
+                            <li><a href="#">Home</a></li>
+                            <li><a href="#">Blog</a></li>
+                            <li class="dropdown">
+                                <a href="#" class="dropdown-toggle" data-toggle="dropdown">Forum <span class="caret"></span></a>
+                                <ul class="dropdown-menu" role="menu">
+                                    <li><a href="#">Action</a></li>
+                                    <li><a href="#">Another action</a></li>
+                                    <li><a href="#">Something else here</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">Separated link</a></li>
+                                    <li class="divider"></li>
+                                    <li><a href="#">One more separated link</a></li>
+                                </ul>
+                            </li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+                            <li><a href="#" data-toggle="modal" data-target=".bs-login">Login</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+            <div class="modal fade bs-login" tabindex="-1">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content">
+                        <div class="login">
+                            <div class="row">
+                                <div class="col-md-4">
+                                    <b>Login</b>
+                                    <hr />
+                                </div>
+                                <div class="col-md-8">
+                                    <b>Register</b>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <form role="form" id="feedbackForm">
+                                                <div class="form-group">
+                                                    <input type="text" class="form-control" id="name" name="name" placeholder="Name">
+                                                </div>
+                                            </form>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <div class="form-group">
+                                                <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <hr />
+                                    <div class="row">
+                                        <div class="col-md-6">
+                                            <a href="#" onclick="document.getElementById('captcha').src = 'api/captcha/securimage_show.php?' + Math.random(); return false">
+                                                <img id="captcha" src="api/captcha/securimage_show.php" alt="CAPTCHA Image" />
+                                            </a>
+                                            <div class="form-group" style="margin-top: 10px;">
+                                                <input type="text" class="form-control" style="width: 100%" name="captcha_code" id="captcha_code" placeholder="For security, please enter the code displayed in the box." />
+                                            </div>
+                                        </div>
+                                        <div class="col-md-6">
+                                            <button type="submit" id="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Register</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="container">
+                <div class="row">
+                    <div class="col-md-9 cont">
+                        <div class="box">
+                            <div class="content-header">De eerste header</div>
+                            <div class="content-content">
+                                Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur condimentum feugiat quam, non bibendum purus sagittis non. Suspendisse potenti. Nulla facilisi. Suspendisse hendrerit, eros ac dictum tristique, quam erat aliquet nulla, vel aliquet lorem dui in eros. Cras consectetur ipsum massa, gravida pharetra leo lacinia et. Curabitur eget pretium ex, vel ullamcorper ante. Duis consectetur purus eget tortor sollicitudin iaculis. Vestibulum suscipit nisi consequat, ullamcorper massa sit amet, dignissim sem. Proin vehicula eu arcu at ultrices. Nulla tempor, augue ac fermentum hendrerit, justo odio scelerisque sem, sit amet aliquet nisi est ut lacus. Sed blandit dignissim magna et volutpat.<br /><br />
+                                Nulla urna sapien, tempor sed posuere ut, vehicula vel ante. Fusce massa ipsum, condimentum quis nibh eget, sagittis ullamcorper risus. Quisque fermentum, ex eu tempor porta, neque lorem viverra felis, vel accumsan neque sem et tortor. Suspendisse sed nisl dolor. Etiam elementum aliquam mauris nec pellentesque. Curabitur convallis diam eget magna hendrerit gravida. Nam tincidunt semper diam ac feugiat.<br /><br />
+                                Vivamus ultricies lacinia orci, id tincidunt libero condimentum a. Maecenas faucibus diam id lacus accumsan feugiat. Pellentesque sit amet semper dolor. Vestibulum nec efficitur magna. Vivamus eget fermentum sapien. Nunc congue tempus rutrum. Maecenas a nunc ac ante condimentum aliquam ac ut purus. Integer sit amet sollicitudin nibh. Aenean sit amet scelerisque leo. Vestibulum tempus lorem erat, et facilisis eros dapibus sed.<br /><br />
+                                Suspendisse eget sodales est. Aliquam ipsum quam, aliquam sed condimentum ornare, posuere et magna. Morbi nec tristique enim. Sed rhoncus felis at feugiat consequat. Morbi suscipit suscipit diam, varius pulvinar mi tincidunt sodales. Morbi sed odio mi. Mauris et egestas ex. In dignissim dolor erat, in faucibus diam scelerisque vel. Nulla bibendum velit non leo volutpat, non dictum lectus lacinia.<br /><br />
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-md-3 side">
+                        <div class="box">
+                            <div class="side-box">
+                                <div class="content-header">De eerste header</div>
+                                <div class="content-content">
+                                    Nulla urna sapien, tempor sed posuere ut, vehicula vel ante. Fusce massa ipsum, condimentum quis nibh eget, sagittis ullamcorper risus. Quisque fermentum, ex eu tempor porta, neque lorem viverra felis, vel accumsan neque sem et tortor. Suspendisse sed nisl dolor.<br />
+                                </div>
+                            </div>
+                            <div class="side-box">
+                                <div class="content-header">De eerste header</div>
+                                <div class="content-content">
+                                    Nulla urna sapien, tempor sed posuere ut, vehicula vel ante. Fusce massa ipsum, condimentum quis nibh eget, sagittis ullamcorper risus. Quisque fermentum, ex eu tempor porta, neque lorem viverra felis, vel accumsan neque sem et tortor. Suspendisse sed nisl dolor.<br />
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="footer">Copyright Dany Sluijk &copy; 2014 | Created with <a href="#" title="SmartCMS">SmartCMS</a></div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
