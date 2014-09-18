@@ -18,11 +18,22 @@ class DB extends FlatFile {
         $this->_DBprefix = $config->getContent("prefix");
         $this->_DBhost = $config->getContent("host");
         $this->_DBport = $config->getContent("port");
-        $this->_connection = mysqli_connect($this->_DBhost.$this->_port, $_this->DBusername, $this->_DBpassword, $this->_DBdatabase); 
+        $this->_connection = mysqli_connect($this->_DBhost.$this->_port, $_this->DBusername, $this->_DBpassword, $this->_DBdatabase);
+        if (mysqli_connect_errno($mysqli)) {
+            return false;
+        } else {
+            return true;
+        }
     }
 
-    public function runQuery() {
-        
+    public function runQuery($query, $returnRaw) {
+        $result = $this->_connection->query($query);
+        if($returnRaw == true) {
+            $return = $query;
+        } else {
+            $return = $result->fetch_assoc();
+        }
+        return $return;
     }
 
 }
