@@ -26,5 +26,15 @@ class Page {
     public function setTitle($title) {
         $this->_title = $title;
     }
+
+    public function getTheme() {
+        $this->_title = $title;
+    }
+
+    public function setTheme($theme) {
+        $this->_title = $title;
+        return true;
+    }
+
 }
 ?>

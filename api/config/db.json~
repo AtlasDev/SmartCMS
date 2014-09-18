@@ -1,7 +1,6 @@
 {
     "host": "localhost",
     "port": 3306,
-    "database": "smartcms",
     "prefix": "smartcms_",
     "username": "root",
     "password": ""
