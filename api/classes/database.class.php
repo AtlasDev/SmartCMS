@@ -19,14 +19,14 @@ class DB extends FlatFile {
         $this->_DBhost = $config->getContent("host");
         $this->_DBport = $config->getContent("port");
         $this->_connection = mysqli_connect($this->_DBhost.$this->_port, $_this->DBusername, $this->_DBpassword, $this->_DBdatabase);
-        if (mysqli_connect_errno($mysqli)) {
+        if (mysqli_connect_errno($this->_connection)) {
             return false;
         } else {
             return true;
         }
     }
 
-    public function runQuery($query, $returnRaw) {
+    public function runQuery($query, $returnRaw=false) {
         $result = $this->_connection->query($query);
         if($returnRaw == true) {
             $return = $query;
@@ -34,6 +34,10 @@ class DB extends FlatFile {
             $return = $result->fetch_assoc();
         }
         return $return;
+    }
+
+    public function getConfig($key) {
+        $result = $this->runQuery("SELECT * FROM {table_prefix} where key = " . $key);
     }
 
 }
