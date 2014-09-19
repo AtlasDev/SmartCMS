@@ -1,0 +1,27 @@
+body {
+    background: url(images/bg.jpg) no-repeat center center fixed; 
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+}
+
+h1 {
+    margin-top: -5px;
+}
+
+.container {
+    background-color: #fff;
+    opacity: 0.9;
+    margin-top: 30px;
+    padding: 10px;
+}
+
+.tab-content {
+    padding: 10px;
+}
+
+.copyright {
+    margin-top: -25px;
+    color: #666;
+}

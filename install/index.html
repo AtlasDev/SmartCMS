@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Install - SmartCMS</title>
+        <meta charset="UTF-8" />
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="css/style.css" />
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/js/bootstrap.min.js"></script>
+        <script src="js/jquery.bootstrap.wizard.js"></script>
+        <script src="js/wizard.js"></script>
+    </head>
+    <body>
+        <div class='container'>
+            <div class="span10">
+                <div id="wizard" class="tabbable tabs-left">
+                    <ul>
+                        <li><a href="#wizard-tab1" data-toggle="tab">Licence Agreement</a></li>
+                        <li><a href="#wizard-tab2" data-toggle="tab">Vailidation</a></li>
+                        <li><a href="#wizard-tab3" data-toggle="tab">Database Setup</a></li>
+                        <li><a href="#wizard-tab4" data-toggle="tab">Create The First User</a></li>
+                        <li><a href="#wizard-tab5" data-toggle="tab">Finishing</a></li>
+                    </ul>
+                    <div class="tab-content">
+                        <div class="tab-pane" id="wizard-tab1">
+                            <h1>Licence agreement</h1>
+                        </div>
+                        <div class="tab-pane" id="wizard-tab2">
+                            <h1>Validation</h1>
+                        </div>
+                        <div class="tab-pane" id="wizard-tab3">
+                            <h1>Database Setup</h1>
+                        </div>
+                        <div class="tab-pane" id="wizard-tab4">
+                            <h1>Create The First User</h1>
+                        </div>
+                        <div class="tab-pane" id="wizard-tab5">
+                            <h1>Finishing up</h1>
+                        </div>
+                        <ul class="pager wizard">
+                            <li class="previous"><a href="javascript:;">Previous</a></li>
+                            <li class="next"><a href="javascript:;">Next</a></li>
+                            <li class="next finish" style="display:none;"><a href="javascript:;">Finish</a></li>
+                        </ul>
+                    </div>
+                    <div class="copyright">
+                        Copyright &copy; 2014 AtlasDev
+                    </div>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>
