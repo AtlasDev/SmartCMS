@@ -142,9 +142,23 @@
 			</aside>
 			<div class="col-md-9 col-lg-10 col-sm-8">
 				<div class="content">
-					<h1>Title</h1>
-					<hr />
-					
+					<?php
+
+                    if(empty($_GET['page']) || !isset($_GET['page'])) {
+                        $page = "home";
+                    } else {
+                        $page = $_GET['page'];
+                    }
+
+                    $path = "pages/" . $page . ".php";
+
+                    if(!file_exists($path)) {
+                        $path = "pages/404.php";
+                    }
+
+                    include_once($path);
+
+                    ?>
 				</div>
 			</div>
 		</div>
