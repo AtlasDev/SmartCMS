@@ -7,6 +7,7 @@ Font Awsome
 http://www.jqueryrain.com/2014/08/create-css3-spinning-preloader/
 ### Soon to be used: ###
 https://github.com/amoffat/bootstrap-application-wizard
+http://blogupstairs.com/folded-paper-effect-3d-javascript/
 
 23 September 2014:
 Work futher on the install script, added the T&C to the wizard
