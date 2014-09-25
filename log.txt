@@ -10,3 +10,6 @@ https://github.com/amoffat/bootstrap-application-wizard
 
 23 September 2014:
 Work futher on the install script, added the T&C to the wizard
+
+25 September 2014:
+Switched to PDO sql, starting rewrite database.class.php
