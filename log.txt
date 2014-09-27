@@ -19,3 +19,6 @@ Work futher on the install script, added the T&C to the wizard
 25 September 2014:
 Switched to PDO sql, starting rewrite database.class.php
 Implementing page system admin backend
+
+27 September 2014:
+Added langControler
