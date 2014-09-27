@@ -13,12 +13,9 @@ Global:
 2 = CMS not installed
 3 = database connection failed
 
-Page.class.php:
-4 = 
-
 **/
 
-$response = array("code" => "", "content" => "", "" => "");
+$response = array("code" => "", "content" => "");
 
 if(empty($_POST['type'])) {
     json_encode($response);
@@ -27,10 +24,12 @@ if(empty($_POST['type'])) {
         $conn = new DB();
         if($conn = false) {
             $response["code"] = 3;
+            $response["content"] = "[SmartCMS] MySQL connection failed!";
             return json_encode($response);
         }
     } else {
         $response["code"] = 2;
+        $response["content"] = "[SmartCMS] This version of SmartCMS is jet not installed, please try again later!";
         return json_encode($response);
     }
 }
