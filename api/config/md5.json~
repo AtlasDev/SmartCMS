@@ -1,0 +1,8 @@
+{
+    "/index.php": "localhost",
+    "/js/bootrap.min.js": 3306,
+    "/js/jquery.js": "smartcms",
+    "prefix": "smartcms_",
+    "username": "root",
+    "password": ""
+}
