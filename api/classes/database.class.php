@@ -5,7 +5,7 @@
 *
 * Response codes:
 *
-* 1001 = Connecting to the database failed
+* 1001 = mysql error
 * 1002 = No drivers found!
 *
 **/
@@ -39,15 +39,13 @@ class DB extends FlatFile {
             $dsn = 'mysql:host='.$this->_DBhost.';port='.$this->_DBport.';dbname='.$this->_DBdatabase;
             $this->_connection = new PDO($dsn, $this->_DBusername, $this->_DBpassword);
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+            return true;
         } catch (PDOException $e) {
-            $response["code"] = 1001;
-            $response["content"] = "[SmartCMS] There was no connection to the database possible!";
-            echo json_encode($response);
             $code = $e->getCode();
-            $file = "config/error.log";
-            $current = file_get_contents($file);
-            $current .= "[Error] ".date("Y-m-d H:i:s")." Mysql returned an error: ".$code."\n";
-            file_put_contents($file, $current);
+            $response["code"] = 1001;
+            $response["content"] = "[SmartCMS] MySQL returned an error : ".$code;
+            echo json_encode($response);
+            log("MySQL returned an error: ".$code);
             return false;
         } 
     }

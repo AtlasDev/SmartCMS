@@ -2,7 +2,6 @@
 
 $_POST['type'] = "d";
 
-
 /**
 * This is the hub of the api, the routing and response are defined here.
 *
@@ -17,6 +16,7 @@ $_POST['type'] = "d";
 *
 **/
 
+include("classes/fuctions.php");
 include("classes/classCombiner.php");
 $response = array("code" => "", "content" => "");
 header('Content-type: application/json');
@@ -30,12 +30,10 @@ if(empty($_POST['type'])) {
 } else {
     if(file_exists("config/installed")) {
         $conn = new DB();
-        if($conn = false) {
-            $response["code"] = 3;
-            $response["content"] = "[SmartCMS] MySQL connection failed!";
-            echo json_encode($response);
-        } else {
+        if($conn = true) {
             
+        } else {
+            die();
         }
     } else {
         $response["code"] = 2;
