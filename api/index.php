@@ -18,19 +18,21 @@ Global:
 $response = array("code" => "", "content" => "");
 
 if(empty($_POST['type'])) {
-    json_encode($response);
+    $response["code"] = 1;
+    $response["content"] = "[SmartCMS] No request type defined!";
+    echo json_encode($response);
 } else {
     if(file_exists("config/installed")) {
         $conn = new DB();
         if($conn = false) {
             $response["code"] = 3;
             $response["content"] = "[SmartCMS] MySQL connection failed!";
-            return json_encode($response);
+            echo json_encode($response);
         }
     } else {
         $response["code"] = 2;
         $response["content"] = "[SmartCMS] This version of SmartCMS is not yet installed, please try again later!";
-        return json_encode($response);
+        echo json_encode($response);
     }
 }
 
