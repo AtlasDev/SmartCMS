@@ -29,7 +29,7 @@ if(empty($_POST['type'])) {
         }
     } else {
         $response["code"] = 2;
-        $response["content"] = "[SmartCMS] This version of SmartCMS is jet not installed, please try again later!";
+        $response["content"] = "[SmartCMS] This version of SmartCMS is not yet installed, please try again later!";
         return json_encode($response);
     }
 }

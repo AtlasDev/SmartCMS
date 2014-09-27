@@ -14,7 +14,11 @@ class Lang extends DB {
     }
 
     public function get($key) {
-        return $this->_json[$key];
+        if (array_key_exists($key, $this->_lang)) {
+            return $this->_lang[$key];
+        } else {
+            return false;
+        }
     }
 }
 ?>
