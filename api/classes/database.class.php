@@ -39,7 +39,6 @@ class DB extends FlatFile {
             $dsn = 'mysql:host='.$this->_DBhost.';port='.$this->_DBport.';dbname='.$this->_DBdatabase;
             $this->_connection = new PDO($dsn, $this->_DBusername, $this->_DBpassword);
             $this->_connection->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-            $this->_connection->exec("QUERY WITH SYNTAX ERROR");
         } catch (PDOException $e) {
             $response["code"] = 1001;
             $response["content"] = "[SmartCMS] There was no connection to the database possible!";
@@ -53,12 +52,8 @@ class DB extends FlatFile {
         } 
     }
 
-    public function runQuery($query, $returnRaw=false) {
-        
-    }
-
-    public function getConfig($key) {
-        
+    public function runQuery($query) {
+        return $this->_connection->exec($query);
     }
 
 }

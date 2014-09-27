@@ -17,22 +17,8 @@ class Page {
         return $this->_title;
     }
 
-    public function setContent($content) {
-        $this->_content = $content;
-        return true;
-    }
-
-    public function setTitle($title) {
-        $this->_title = $title;
-    }
-
     public function getTheme() {
         $this->_title = $title;
-    }
-
-    public function setTheme($theme) {
-        $this->_title = $title;
-        return true;
     }
 
 }
