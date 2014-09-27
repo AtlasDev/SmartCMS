@@ -1,5 +1,4 @@
 <?php
-include_once("DB.class.php");
 
 class Page {
     private $_title;

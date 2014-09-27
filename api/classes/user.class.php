@@ -1,5 +1,4 @@
 <?php
-include_once("DB.class.php");
 
 class User extends DB {
     private $_username;
@@ -8,4 +7,5 @@ class User extends DB {
     private $_email;
     private $_salt;
 }
+
 ?>
