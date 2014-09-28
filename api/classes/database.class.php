@@ -51,6 +51,7 @@ class DB extends FlatFile {
     }
 
     public function runQuery($query) {
+        $query = str_replace("{prefix}", $this->_DBprefix, $query);
         return $this->_connection->exec($query);
     }
 

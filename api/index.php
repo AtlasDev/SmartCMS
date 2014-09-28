@@ -31,7 +31,8 @@ if(empty($_POST['type'])) {
     if(file_exists("config/installed")) {
         $conn = new DB();
         if($conn = true) {
-            
+            $result = $conn->runQuery("SELECT * FROM {prefix}config");
+            var_dump($result);
         } else {
             die();
         }
