@@ -16,10 +16,10 @@ $_POST['type'] = "d";
 *
 **/
 
-include("classes/fuctions.php");
+include("classes/functions.php");
 include("classes/classCombiner.php");
 $response = array("code" => "", "content" => "");
-header('Content-type: application/json');
+//header('Content-type: application/json');
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
