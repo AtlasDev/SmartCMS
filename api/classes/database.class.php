@@ -45,7 +45,7 @@ class DB extends FlatFile {
             $response["code"] = 1001;
             $response["content"] = "[SmartCMS] MySQL returned an error : ".$code;
             echo json_encode($response);
-            log("MySQL returned an error: ".$code);
+            log_error("MySQL returned an error: ".$code);
             return false;
         } 
     }
