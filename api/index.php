@@ -32,7 +32,7 @@ if(empty($_POST['type'])) {
         $conn = new DB();
         if($conn == true) {
             $result = $conn->runQuery("SELECT * FROM smartcms_config");
-            var_dump($result);
+            print_r($result);
         } else {
             die();
         }

@@ -5,8 +5,9 @@
 *
 * Response codes:
 *
-* 1001 = mysql error
-* 1002 = No drivers found!
+* 1001 = mysql error while connecting
+* 1002 = mysql error while executing query
+* 1003 = No drivers found!
 *
 **/
 
@@ -22,7 +23,7 @@ class DB extends FlatFile {
     public function __construct() {
         $response = array("code" => "", "content" => "");
         if(PDO::getAvailableDrivers() == 0){
-            $response["code"] = 1002;
+            $response["code"] = 1003;
             $response["content"] = "[SmartCMS] There were no drivers found!";
             echo json_encode($response);
             return false;
@@ -43,7 +44,7 @@ class DB extends FlatFile {
         } catch (PDOException $e) {
             $code = $e->getCode();
             $response["code"] = 1001;
-            $response["content"] = "[SmartCMS] MySQL returned an error: ".$code;
+            $response["content"] = "[SmartCMS] MySQL returned an error on connecting! Error code: ".$code;
             echo json_encode($response);
             log_error("MySQL returned an error: ".$code);
             return false;
@@ -51,8 +52,31 @@ class DB extends FlatFile {
     }
 
     public function runQuery($query) {
-        $query = str_replace("{prefix}", $this->_DBprefix, $query);
-        return $this->_connection->exec($query);
+    
+    
+        try {
+            $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+            $stmt->execute();
+            $row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_LAST);
+            //do {
+                //$data = $row["key"] . "\t" . $row[1] . "\t" . $row["value"] . "\n";
+                //print $data;
+            //} while ($row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_PRIOR));
+            return $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_PRIOR);
+        } catch (PDOException $e) {
+            $code = $e->getCode();
+            $response["code"] = 1002;
+            $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;
+            echo json_encode($response);
+            log_error("MySQL returned an error: ".$code);
+            return false;
+        }
+    
+    
+        //$query = str_replace("{prefix}", $this->_DBprefix, $query);
+        //echo $query;
+        //echo $this->_connection->exec($query);
+        //return true;
     }
 
 }
