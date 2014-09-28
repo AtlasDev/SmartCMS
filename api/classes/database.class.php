@@ -43,7 +43,7 @@ class DB extends FlatFile {
         } catch (PDOException $e) {
             $code = $e->getCode();
             $response["code"] = 1001;
-            $response["content"] = "[SmartCMS] MySQL returned an error : ".$code;
+            $response["content"] = "[SmartCMS] MySQL returned an error: ".$code;
             echo json_encode($response);
             log_error("MySQL returned an error: ".$code);
             return false;
