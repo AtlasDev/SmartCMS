@@ -1,6 +1,6 @@
 <?php
 
-$_POST['type'] = "d";
+$_POST['type'] = "template";
 
 /**
 * This is the hub of the api, the routing and response are defined here.
@@ -24,7 +24,7 @@ $response = array("code" => "", "content" => "");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-$types = array("content", "page");
+$types = array("template", "page");
 
 if(empty($_POST['type'])) {
     $response["code"] = 1;
@@ -36,8 +36,9 @@ if(empty($_POST['type'])) {
             $conn = new DB();
             //$result = $conn->query("SELECT * FROM smartcms_config");
             if($conn == true) {
-                if($_POST['type'] == "") {
-                    
+                if($_POST['type'] == "template") {
+                    $menu = $conn->query("SELECT * FROM smartcms_menu");
+                    $sidebar = $conn->query("SELECT * FROM smartcms_sidebar");
                 }
             } else {
                 die();
