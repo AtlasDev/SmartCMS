@@ -26,3 +26,7 @@ Started programming the main api file
 make the database class __construct working
 
 28 September 2014:
+Working on database connection functions
+
+29 September 2014:
+Finished database connection functions
