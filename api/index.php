@@ -10,7 +10,8 @@ $_POST['type'] = "d";
 * 0 = success
 * 1 = No request type defined
 * 2 = CMS not installed
-* 3 = database connection failed
+* 3 = Database connection failed
+* 4 = Request type not vailid
 *
 * 1*** = see database.class.php
 *
@@ -23,22 +24,32 @@ $response = array("code" => "", "content" => "");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
+$types = array("content", "page");
+
 if(empty($_POST['type'])) {
     $response["code"] = 1;
     $response["content"] = "[SmartCMS] No request type defined!";
     echo json_encode($response);
 } else {
-    if(file_exists("config/installed")) {
-        $conn = new DB();
-        //$result = $conn->query("SELECT * FROM smartcms_config");
-        if($conn == true) {
-            
+    if(in_array($_POST['type'], $types)) {
+        if(file_exists("config/installed")) {
+            $conn = new DB();
+            //$result = $conn->query("SELECT * FROM smartcms_config");
+            if($conn == true) {
+                if($_POST['type'] == "") {
+                    
+                }
+            } else {
+                die();
+            }
         } else {
-            die();
+            $response["code"] = 2;
+            $response["content"] = "[SmartCMS] This version of SmartCMS is not yet installed, please try again later!";
+            echo json_encode($response);
         }
     } else {
-        $response["code"] = 2;
-        $response["content"] = "[SmartCMS] This version of SmartCMS is not yet installed, please try again later!";
+        $response["code"] = 4;
+        $response["content"] = "[SmartCMS] Request type not vailid!";
         echo json_encode($response);
     }
 }
