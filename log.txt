@@ -28,5 +28,6 @@ make the database class __construct working
 28 September 2014:
 Working on database connection functions
 
-29 September 2014:
+3 October 2014:
 Finished database connection functions
+Started working on template engine
