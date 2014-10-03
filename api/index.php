@@ -30,9 +30,9 @@ if(empty($_POST['type'])) {
 } else {
     if(file_exists("config/installed")) {
         $conn = new DB();
+        //$result = $conn->query("SELECT * FROM smartcms_config");
         if($conn == true) {
-            $result = $conn->runQuery("SELECT * FROM smartcms_config");
-            print_r($result);
+            
         } else {
             die();
         }

@@ -51,18 +51,15 @@ class DB extends FlatFile {
         } 
     }
 
-    public function runQuery($query) {
-    
-    
+    public function query($query) {
         try {
             $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
             $stmt->execute();
-            $row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_LAST);
-            //do {
-                //$data = $row["key"] . "\t" . $row[1] . "\t" . $row["value"] . "\n";
-                //print $data;
-            //} while ($row = $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_PRIOR));
-            return $stmt->fetch(PDO::FETCH_NUM, PDO::FETCH_ORI_PRIOR);
+            $result = [];
+            while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
+                $result[] = $row;
+            }
+            return $result;
         } catch (PDOException $e) {
             $code = $e->getCode();
             $response["code"] = 1002;
@@ -71,13 +68,7 @@ class DB extends FlatFile {
             log_error("MySQL returned an error: ".$code);
             return false;
         }
-    
-    
-        //$query = str_replace("{prefix}", $this->_DBprefix, $query);
-        //echo $query;
-        //echo $this->_connection->exec($query);
-        //return true;
     }
-
+    
 }
 ?>
