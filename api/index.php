@@ -3,18 +3,20 @@
 $_POST['type'] = "template";
 
 /**
-* This is the hub of the api, the routing and response are defined here.
-*
-* Response codes:
-*
-* 0 = success
-* 1 = No request type defined
-* 2 = CMS not installed
-* 3 = Database connection failed
-* 4 = Request type not vailid
-*
-* 1*** = see database.class.php
-*
+
+  This is the hub of the api, the routing and response are defined here.
+
+  Response codes:
+
+  0 = success
+  1 = No request type defined
+  2 = CMS not installed
+  3 = Database connection failed
+  4 = Request type not vailid
+
+  1*** = see database.class.php
+  2*** = see template.class.php
+
 **/
 
 include("classes/functions.php");
@@ -37,6 +39,7 @@ if(empty($_POST['type'])) {
             //$result = $conn->query("SELECT * FROM smartcms_config");
             if($conn == true) {
                 if($_POST['type'] == "template") {
+                    $template = new Template();
                     $menu = $conn->query("SELECT * FROM smartcms_menu");
                     $sidebar = $conn->query("SELECT * FROM smartcms_sidebar");
                 }

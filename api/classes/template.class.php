@@ -1,10 +1,20 @@
 <?php
 
+/**
+
+  This is where the theme, menu and sidebar is handled (Not the content!)
+
+  Response codes:
+
+  2001 = Unknown theme
+
+**/
+
 class Template {
 
     private $_theme;
     
-    public function __construct($theme == "default") {
+    public function __construct($theme = "") {
         $this->_theme = $theme;
     }
 
@@ -12,8 +22,10 @@ class Template {
         return $this->_theme;
     }
     
-    public function render() {
+    public function get
     
+    public function render() {
+        
     }
 
 }

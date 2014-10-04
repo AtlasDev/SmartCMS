@@ -1,14 +1,15 @@
 <?php
 
 /**
-* This is the core where the database connection is managed and query's are executed
-*
-* Response codes:
-*
-* 1001 = mysql error while connecting
-* 1002 = mysql error while executing query
-* 1003 = No drivers found!
-*
+
+  This is the core where the database connection is managed and query's are executed
+
+  Response codes:
+
+  1001 = mysql error while connecting
+  1002 = mysql error while executing query
+  1003 = No drivers found!
+
 **/
 
 class DB extends FlatFile {
