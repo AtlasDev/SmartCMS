@@ -1,6 +1,6 @@
 <?php
 
-class User extends DB {
+class User {
     private $_username;
     private $_sessionkey;
     private $_fullname;

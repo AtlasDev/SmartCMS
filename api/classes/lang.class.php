@@ -1,5 +1,5 @@
 <?php
-class Lang extends DB {
+class Lang {
     private $_lang;
 
     public function __construct($lang) {

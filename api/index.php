@@ -40,8 +40,6 @@ if(empty($_POST['type'])) {
             if($conn == true) {
                 if($_POST['type'] == "template") {
                     $template = new Template();
-                    $menu = $conn->query("SELECT * FROM smartcms_menu");
-                    $sidebar = $conn->query("SELECT * FROM smartcms_sidebar");
                 }
             } else {
                 die();
