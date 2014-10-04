@@ -40,6 +40,7 @@ if(empty($_POST['type'])) {
             if($conn == true) {
                 if($_POST['type'] == "template") {
                     $template = new Template();
+                    print_r($template->getMenu());
                 }
             } else {
                 die();

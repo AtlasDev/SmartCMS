@@ -13,11 +13,12 @@
 class Template {
 
     private $_theme;
+    private $_conn;
     
     public function __construct($theme = "") {
         global $conn;
+        $this->_conn = $conn;
         $this->_theme = $theme;
-        print_r($conn->query("SELECT * FROM {prefix}config"));
     }
 
     public function getThemeName() {
@@ -29,7 +30,7 @@ class Template {
     }
     
     public function getMenu() {
-        
+        return $this->_conn->query("SELECT * FROM {prefix}menu");
     }
     
     public function getSideBar() {
