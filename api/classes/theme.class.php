@@ -10,7 +10,7 @@
 
 **/
 
-class Template {
+class Theme {
 
     private $_theme;
     private $_conn;

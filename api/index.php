@@ -1,7 +1,7 @@
 <?php
 
 ini_set('display_errors', 1);
-$_POST['type'] = "template";
+$_POST['type'] = "theme";
 
 /**
 
@@ -16,7 +16,7 @@ $_POST['type'] = "template";
   4 = Request type not vailid
 
   1*** = see database.class.php
-  2*** = see template.class.php
+  2*** = see theme.class.php
 
 **/
 
@@ -27,7 +27,7 @@ $response = array("code" => "", "content" => "");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-$types = array("template", "page");
+$types = array("theme", "page");
 
 if(empty($_POST['type'])) {
     $response["code"] = 1;
@@ -39,9 +39,9 @@ if(empty($_POST['type'])) {
             $conn = new DB();
             //$result = $conn->query("SELECT * FROM smartcms_config");
             if($conn == true) {
-                if($_POST['type'] == "template") {
-                    $template = new Template();
-                    print_r($template->getMenu());
+                if($_POST['type'] == "theme") {
+                    $theme = new theme();
+                    print_r($theme->getMenu());
                 }
             } else {
                 die();
