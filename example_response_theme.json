@@ -1,0 +1,26 @@
+{
+    "theme": {
+        "html": "api/themes/flat/index.html",
+        "css": ["api/themes/flat/style.css", "api/themes/flat/other.css"],
+        "js": ["api/themes/flat/main.js", "api/themes/flat/second.js"],
+        "menu": [
+            {
+                "id": "1",
+                "title": "Home",
+                "destination": "http://www.atlasdev.nl",
+                "parent": ""
+            }, {
+                "id": "2",
+                "title": "sub",
+                "destination": "http://www.atlasdev.nl/sponge",
+                "parent": "1"
+            }, {
+                "id": "1",
+                "title": "Google",
+                "destination": "http://www.google.nl",
+                "parent": ""
+            }
+        ],
+        "footer": "Copyright Dany Sluijk © 2014 | Created with SmartCMS | Flat theme by AtlasDev"
+    }
+}
