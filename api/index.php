@@ -41,7 +41,7 @@ if(empty($_POST['type'])) {
             if($conn == true) {
                 if($_POST['type'] == "theme") {
                     $theme = new theme();
-                    print_r($theme->getMenu());
+                    echo json_encode($theme->getMenu());
                 }
             } else {
                 die();
