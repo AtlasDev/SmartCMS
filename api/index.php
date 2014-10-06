@@ -37,7 +37,6 @@ if(empty($_POST['type'])) {
     if(in_array($_POST['type'], $types)) {
         if(file_exists("config/installed")) {
             $conn = new DB();
-            //$result = $conn->query("SELECT * FROM smartcms_config");
             if($conn == true) {
                 if($_POST['type'] == "theme") {
                     $theme = new theme();
