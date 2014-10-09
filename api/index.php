@@ -16,6 +16,7 @@ $_POST['type'] = "theme";
 
   1*** = see database.class.php
   2*** = see theme.class.php
+  3*** = see user.class.php
 
 **/
 
