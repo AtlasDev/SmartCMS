@@ -36,9 +36,14 @@ class User {
     public function login($username, $password) {
         $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username='".$username."'");
         $user = $result[0];
+        if($this->_encryptPassword($password, $user["salt"]) == $user["password"])
     }
 
-    public function generateKey() {
+    private function _encryptPassword($password, $salt) {
+        return hash("sha256", hash("sha256", $salt) . hash("sha256", $password));
+    }
+
+    private function _generateKey() {
         $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&+=';
         $randomString = '';
         for ($i = 0; $i < 50; $i++) {
