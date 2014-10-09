@@ -27,7 +27,7 @@ header('Content-type: application/json');
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-$types = array("theme", "page");
+$types = array("theme", "page", "login");
 
 if(empty($_POST['type'])) {
     $response["code"] = 1;
@@ -39,8 +39,14 @@ if(empty($_POST['type'])) {
             $conn = new DB();
             if($conn == true) {
                 if($_POST['type'] == "theme") {
-                    $theme = new theme();
+                    $theme = new Theme();
                     echo json_encode($theme->getMenu());
+                } else if ($_POST['type'] == login) {
+                    $user = new User();
+                    $login = $user->login($_POST["username"], $_POST["password"]);
+                    if($login == false) {
+                        die();
+                    }
                 }
             } else {
                 die();

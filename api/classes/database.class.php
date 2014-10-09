@@ -52,11 +52,11 @@ class DB extends FlatFile {
         } 
     }
 
-    public function query($query) {
+    public function query($query, $prep = "") {
         try {
             $query = str_replace("{prefix}", $this->_DBprefix, $query);
             $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
-            $stmt->execute();
+            $stmt->execute($prep);
             $result;
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $result[] = $row;
