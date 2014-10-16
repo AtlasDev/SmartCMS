@@ -70,50 +70,56 @@
         </nav>
         <div class="modal fade bs-login" tabindex="-1">
             <div class="modal-dialog modal-lg">
-                <div class="modal-content">
-                    <div id="login">
-                        <div class="row">
-                            <div class="col-md-4">
+                <div class="modal-content login">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <form id="login" role="form">
                                 <b>Login</b>
                                 <hr />
-                                <form role="form">
-                                    <div class="form-group">
-                                        <input type="text" class="form-control" id="name" name="name" placeholder="Username">
-                                    </div>
-                                </form>
-                            </div>
-                            <div class="col-md-8">
+                                <div class="form-group">
+                                    <input type="text" class="form-control" id="name" name="name" placeholder="Username">
+                                </div>
+                                <div class="form-group">
+                                    <input type="password" class="form-control" id="password" name="password" placeholder="Password">
+                                </div>
+                                <hr />
+                                <div class="form-group">
+                                    <button type="submit" id="login" class="btn btn-primary col-md-12 btn-lg">Login</button>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="col-md-8">
+                            <form id="register" role="form">
                                 <b>Register</b>
                                 <hr />
                                 <div class="row">
                                     <div class="col-md-6">
-                                        <form role="form">
-                                            <div class="form-group">
-                                                <input type="text" class="form-control" id="name" name="name" placeholder="Name">
-                                            </div>
-                                        </form>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="username" name="username" placeholder="Username">
+                                        </div>
+                                        <div class="form-group">
+                                            <input type="text" class="form-control" id="name" name="name" placeholder="Real name">
+                                        </div>
                                     </div>
                                     <div class="col-md-6">
                                         <div class="form-group">
                                             <input type="email" class="form-control" id="email" name="email" placeholder="Email Address">
                                         </div>
-                                    </div>
-                                </div>
-                                <hr />
-                                <div class="row">
-                                    <div class="col-md-6">
-                                        <a href="#" onclick="document.getElementById('captcha').src = 'api/captcha/securimage_show.php?' + Math.random(); return false">
-                                            <img id="captcha" src="api/captcha/securimage_show.php" alt="CAPTCHA Image" />
-                                        </a>
-                                        <div class="form-group" style="margin-top: 10px;">
-                                            <input type="text" class="form-control" style="width: 100%" name="captcha_code" id="captcha_code" placeholder="For security, please enter the code displayed in the box." />
+                                        <hr />
+                                        <div class="form-group">
+                                            <a href="#" onclick="document.getElementById('captcha').src = 'api/captcha/securimage_show.php?' + Math.random(); return false">
+                                                <img id="captcha" src="api/captcha/securimage_show.php" alt="CAPTCHA Image" />
+                                            </a>
+                                            <div class="form-group" style="margin-top: 10px;">
+                                                <input type="text" class="form-control" style="width: 100%" name="captcha_code" id="captcha_code" placeholder="For security, please enter the code displayed in the box." />
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <button type="submit" id="register" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Register</button>
                                         </div>
                                     </div>
-                                    <div class="col-md-6">
-                                        <button type="submit" id="feedbackSubmit" class="btn btn-primary btn-lg" style="display: block; margin-top: 10px;">Register</button>
-                                    </div>
                                 </div>
-                            </div>
+                            </form>
                         </div>
                     </div>
                 </div>
