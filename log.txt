@@ -2,6 +2,7 @@
 Bootstrap
 Jquery
 Font Awsome
+AngularJS
 
 	Used tutorials:
 http://www.jqueryrain.com/2014/08/create-css3-spinning-preloader/
@@ -31,3 +32,9 @@ Working on database connection functions
 3 October 2014:
 Finished database connection functions
 Started working on template engine
+
+4 -> 16 October 2014:
+Started working on user system
+Started working on json response
+Futher working on template engine
+Started using AngularJS
