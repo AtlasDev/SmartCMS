@@ -12,7 +12,7 @@
 **/
 
 class User {
-    private $_conn
+    private $_conn;
     private $_session;
     public $username;
     public $fullname;
