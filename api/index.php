@@ -1,6 +1,6 @@
 <?php
 
-$_POST['type'] = "theme";
+$_POST['type'] = "menu";
 
 /**
 
@@ -23,7 +23,6 @@ $_POST['type'] = "theme";
 include("classes/functions.php");
 include("classes/classCombiner.php");
 $response = array("code" => "", "content" => "");
-header('Content-type: application/json');
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
@@ -38,7 +37,7 @@ if(empty($_POST['type'])) {
         if(file_exists("config/installed")) {
             $conn = new DB();
             if($conn == true) {
-                if($_POST['type'] == "theme") {
+                if($_POST['type'] == "menu") {
                     $theme = new Theme();
                     echo json_encode($theme->getMenu());
                 } else if ($_POST['type'] == login) {
