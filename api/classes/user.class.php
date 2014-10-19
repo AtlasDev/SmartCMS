@@ -9,6 +9,7 @@
   3001 = Invalid session key
   3002 = Invalid login credentials
   3003 = Username and/or password empty
+  3004 = Session timed out
 
 **/
 
@@ -23,11 +24,45 @@ class User {
     public $registerIP;
     public $lastLogin;
     public $lastIP;
+    public $loggedIn;
 
     public function __construct($session = "") {
         if($session == "" || strlen($session) == 50) {
             global $conn;
             $this->_conn = $conn;
+            $result = $this->_conn->select("SELECT * FROM {prefix}users WHERE sessionID = :sessionID", array(":sessionID" => $session));
+            if(isset($result[0]) || $session == "") {
+                $user = $result[0];
+                $this->_session = $session;
+                $this->username = $user["username"];
+                $this->fullname = $user["fullname"];
+                $this->email = $user["email"];
+                $this->permLevel = $user["perm_level"];
+                $this->registerIP = $user["registerIP"];
+                $this->registerDate = $user["registerDate"];
+                $time = time();
+                if($user["lastLogin"] >= $time - 3600) {
+                    $ip = $_SERVER["REMOTE_ADDR"];
+                    $this->lastLogin = $time;
+                    $this->lastIP = $ip;
+                    $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip);
+                    $this->_conn->query("UPDATE {prefix}users SET lastLogin = :lastLogin, lastIP = :lastIP WHERE sessionID = :sessionID", $prep);
+                    $this->loggedIn = true;
+                    var_dump($user);
+                } else {
+                    $this->loggedIn = false;
+                    $response["code"] = 3004;
+                    $response["content"] = "[SmartCMS] The session timed out!";
+                    echo json_encode($response);
+                    return false;
+                }
+            } else {
+                $this->loggedIn = false;
+                $response["code"] = 3001;
+                $response["content"] = "[SmartCMS] The session key is invalid!";
+                echo json_encode($response);
+                return false;
+            }
             $this->_session = $session;
             return true;
         } else {
@@ -67,7 +102,8 @@ class User {
                 $this->lastIP = $ip;
                 $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip , ':id' => $user["id"]);
                 $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = :lastIP WHERE id = :id", $prep);
-                return true;
+                $this->loggedIn = true;
+                return $this->_session;
             } else {
                 $response["code"] = 3002;
                 $response["content"] = "[SmartCMS] Login credentials invalid!";
@@ -82,7 +118,7 @@ class User {
     }
 
     private function _generateKey() {
-        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ!@#$%&+=';
+        $characters = '0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ';
         $randomString = '';
         for ($i = 0; $i < 50; $i++) {
             $randomString .= $characters[rand(0, strlen($characters) - 1)];

@@ -79,7 +79,6 @@ class DB extends FlatFile {
             $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
             return $stmt->execute($prep);
         } catch (PDOException $e) {
-            echo $e;
             $code = $e->getCode();
             $response["code"] = 1002;
             $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;

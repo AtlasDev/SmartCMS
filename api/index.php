@@ -1,8 +1,7 @@
 <?php
 
-$_POST['type'] = "login";
-$_POST['username'] = "AtlasDev";
-$_POST['password'] = "password";
+$_POST['type'] = "page";
+$_POST['session'] = "D4nwbCRukvjZaYyZhJXWN1lQgw39OuXP1CnlZ8aFiLEh3JH8RI";
 
 /**
 
@@ -40,11 +39,15 @@ if(empty($_POST['type'])) {
         if(file_exists("config/installed")) {
             $conn = new DB();
             if($conn == true) {
-                if($_POST['type'] == "menu") {
-                    $theme = new Theme();
-                    echo json_encode($theme->getMenu());
-                } else if ($_POST['type'] == "login") {
-                    $user = new User();
+                $user = new User($_POST["session"]);
+                if($_POST["type"] != "login") {
+                    if($_POST['type'] == "menu") {
+                        $theme = new Theme();
+                        echo json_encode($theme->getMenu());
+                    } else if ($_POST['type'] == "page") {
+                        
+                    }
+                } else {
                     if(!isset($_POST["username"])) {
                         $_POST["username"] = "";
                     }
