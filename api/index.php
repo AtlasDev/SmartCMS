@@ -55,7 +55,9 @@ if(empty($_POST['type'])) {
                     if($login == false) {
                         die();
                     } else {
-                        echo "succes!";
+                        $response["code"] = 0;
+                        $response["content"] = $login;
+                        echo json_encode($response);
                     }
                 }
             } else {
