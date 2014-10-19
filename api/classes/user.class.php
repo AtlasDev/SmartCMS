@@ -31,14 +31,14 @@ class User {
             return true;
         } else {
             $response["code"] = 3001;
-            $response["content"] = "[SmartCMS] The session key is invailid!";
+            $response["content"] = "[SmartCMS] The session key is invalid!";
             echo json_encode($response);
             return false;
         }
     }
 
     public function login($username, $password) {
-        $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username = :username", array(':username' => $username);
+        $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username);
         $user = $result[0];
         if($this->_encryptPassword($password, $user["salt"]) == $user["password"]) {
             $this->_session = $this->_generateKey();
@@ -57,7 +57,7 @@ class User {
             return true;
         } else {
             $response["code"] = 3002;
-            $response["content"] = "[SmartCMS] Login creditals invailid!";
+            $response["content"] = "[SmartCMS] Login credentials invalid!";
             echo json_encode($response);
             return false;
         }
