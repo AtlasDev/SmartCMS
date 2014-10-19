@@ -1,6 +1,8 @@
 <?php
 
-$_POST['type'] = "menu";
+$_POST['type'] = "login";
+$_POST['username'] = "AtlasDev";
+$_POST['password'] = "password";
 
 /**
 
@@ -22,6 +24,7 @@ $_POST['type'] = "menu";
 
 include("classes/functions.php");
 include("classes/classCombiner.php");
+header('Content-type: application/json');
 $response = array("code" => "", "content" => "");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
@@ -40,11 +43,19 @@ if(empty($_POST['type'])) {
                 if($_POST['type'] == "menu") {
                     $theme = new Theme();
                     echo json_encode($theme->getMenu());
-                } else if ($_POST['type'] == login) {
+                } else if ($_POST['type'] == "login") {
                     $user = new User();
+                    if(!isset($_POST["username"])) {
+                        $_POST["username"] = "";
+                    }
+                    if(!isset($_POST["password"])) {
+                        $_POST["password"] = "";
+                    }
                     $login = $user->login($_POST["username"], $_POST["password"]);
                     if($login == false) {
                         die();
+                    } else {
+                        echo "succes!";
                     }
                 }
             } else {

@@ -51,18 +51,35 @@ class DB extends FlatFile {
             return false;
         } 
     }
-
-    public function query($query, $prep = "") {
+    
+    public function select($query, $prep = "") {
         try {
             $query = str_replace("{prefix}", $this->_DBprefix, $query);
             $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
             $stmt->execute($prep);
-            $result;
+            $result = array();
             while ($row = $stmt->fetch(PDO::FETCH_ASSOC)) {
                 $result[] = $row;
             }
             return $result;
         } catch (PDOException $e) {
+            echo $e;
+            $code = $e->getCode();
+            $response["code"] = 1002;
+            $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;
+            echo json_encode($response);
+            log_error("MySQL returned an error: ".$code);
+            return false;
+        }
+    }
+
+    public function query($query, $prep = "") {
+        try {
+            $query = str_replace("{prefix}", $this->_DBprefix, $query);
+            $stmt = $this->_connection->prepare($query, array(PDO::ATTR_CURSOR => PDO::CURSOR_SCROLL));
+            return $stmt->execute($prep);
+        } catch (PDOException $e) {
+            echo $e;
             $code = $e->getCode();
             $response["code"] = 1002;
             $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;

@@ -6,8 +6,9 @@
 
   Response codes:
 
-  3001 = Invailid session key
-  3002 = Invailid login creditals
+  3001 = Invalid session key
+  3002 = Invalid login credentials
+  3003 = Username and/or password empty
 
 **/
 
@@ -37,29 +38,42 @@ class User {
         }
     }
 
-    public function login($username, $password) {
-        $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username));
-        $user = $result[0];
-        if($this->_encryptPassword($password, $user["salt"]) == $user["password"]) {
-            $this->_session = $this->_generateKey();
-            $this->username = $user["username"];
-            $this->fullname = $user["fullname"];
-            $this->email = $user["email"];
-            $this->permLevel = $user["perm_level"];
-            $this->registerIP = $user["registerIP"];
-            $this->registerDate = $user["registerDate"];
-            $date = date();
-            $ip = $_SERVER["REMOTE_ADDR"];
-            $this->lastLogin = $date;
-            $this->lastIP = $ip;
-            $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip , ':id' => $user["id"]);
-            $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = lastIP WHERE id = :id", $prep);
-            return true;
-        } else {
-            $response["code"] = 3002;
-            $response["content"] = "[SmartCMS] Login credentials invalid!";
+    public function login($username = "", $password = "") {
+        if($username == "" || $password == "") {
+            $response["code"] = 3003;
+            $response["content"] = "[SmartCMS] Username and/or password empty!";
             echo json_encode($response);
             return false;
+        } else {
+            $result = $this->_conn->select("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username));
+            if(!isset($result[0])) {
+                $response["code"] = 3002;
+                $response["content"] = "[SmartCMS] Login credentials invalid!";
+                echo json_encode($response);
+                return false;
+            }
+            $user = $result[0];
+            if($this->_encryptPassword($password, $user["salt"]) == $user["password"]) {
+                $this->_session = $this->_generateKey();
+                $this->username = $user["username"];
+                $this->fullname = $user["fullname"];
+                $this->email = $user["email"];
+                $this->permLevel = $user["perm_level"];
+                $this->registerIP = $user["registerIP"];
+                $this->registerDate = $user["registerDate"];
+                $time = time();
+                $ip = $_SERVER["REMOTE_ADDR"];
+                $this->lastLogin = $time;
+                $this->lastIP = $ip;
+                $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip , ':id' => $user["id"]);
+                $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = :lastIP WHERE id = :id", $prep);
+                return true;
+            } else {
+                $response["code"] = 3002;
+                $response["content"] = "[SmartCMS] Login credentials invalid!";
+                echo json_encode($response);
+                return false;
+            }
         }
     }
 
