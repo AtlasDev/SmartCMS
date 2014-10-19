@@ -30,7 +30,7 @@ class Theme {
     }
     
     public function getMenu() {
-        return $this->_conn->query("SELECT * FROM {prefix}menu");
+        return $this->_conn->query("SELECT * FROM {prefix}menu", array());
     }
     
     public function getSideBar() {

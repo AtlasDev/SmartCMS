@@ -38,7 +38,7 @@ class User {
     }
 
     public function login($username, $password) {
-        $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username);
+        $result = $this->_conn->query("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username));
         $user = $result[0];
         if($this->_encryptPassword($password, $user["salt"]) == $user["password"]) {
             $this->_session = $this->_generateKey();
@@ -53,7 +53,7 @@ class User {
             $this->lastLogin = $date;
             $this->lastIP = $ip;
             $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip , ':id' => $user["id"]);
-            $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = lastIP WHERE id = :id", $prep;
+            $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = lastIP WHERE id = :id", $prep);
             return true;
         } else {
             $response["code"] = 3002;
