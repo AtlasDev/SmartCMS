@@ -6,6 +6,7 @@ AngularJS
 
 	Used tutorials:
 http://www.jqueryrain.com/2014/08/create-css3-spinning-preloader/
+https://jonbake.com/blog/bootstrap-3-contact-form-with-captcha/
 ### Soon to be used: ###
 https://github.com/amoffat/bootstrap-application-wizard
 http://blogupstairs.com/folded-paper-effect-3d-javascript/
