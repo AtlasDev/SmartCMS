@@ -42,7 +42,7 @@ body {
     margin: 3px;
 }
 
-.user-bottom  a {
+.user-bottom a {
     -moz-box-shadow: inset 0 0 2px #000000;
     -webkit-box-shadow: inset 0 0 2px #000000;
     box-shadow: inset 0 0 2px #000000;
