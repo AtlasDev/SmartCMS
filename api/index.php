@@ -39,7 +39,7 @@ if(empty($_POST['type'])) {
         if(file_exists("config/installed")) {
             $conn = new DB();
             if($conn == true) {
-                $user = new User($_POST["session"]);
+                $user = new User();
                 if($_POST["type"] != "login") {
                     if($_POST['type'] == "menu") {
                         $theme = new Theme();

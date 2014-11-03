@@ -16,10 +16,6 @@ class Page {
     public function getTitle() {
         return $this->_title;
     }
-
-    public function getTheme() {
-        $this->_title = $title;
-    }
-
 }
+
 ?>

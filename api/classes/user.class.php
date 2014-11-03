@@ -19,25 +19,30 @@ class User {
     public $username;
     public $fullname;
     public $email;
-    public $permLevel;
+    public $group;
     public $registerDate;
     public $registerIP;
     public $lastLogin;
     public $lastIP;
     public $loggedIn;
 
-    public function __construct($session = "") {
-        if($session == "" || strlen($session) == 50) {
-            global $conn;
-            $this->_conn = $conn;
+    public function __construct() {
+        global $conn;
+        $this->_conn = $conn;
+        $this->loggedIn = false;
+        $this->group = false;
+    }
+
+    public function resume($session) {
+        if(strlen($session) == 50) {
             $result = $this->_conn->select("SELECT * FROM {prefix}users WHERE sessionID = :sessionID", array(":sessionID" => $session));
-            if(isset($result[0]) || $session == "") {
+            if(isset($result[0])) {
                 $user = $result[0];
                 $this->_session = $session;
                 $this->username = $user["username"];
                 $this->fullname = $user["fullname"];
                 $this->email = $user["email"];
-                $this->permLevel = $user["perm_level"];
+                $this->group = $user["group"];
                 $this->registerIP = $user["registerIP"];
                 $this->registerDate = $user["registerDate"];
                 $time = time();
@@ -48,7 +53,7 @@ class User {
                     $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip);
                     $this->_conn->query("UPDATE {prefix}users SET lastLogin = :lastLogin, lastIP = :lastIP WHERE sessionID = :sessionID", $prep);
                     $this->loggedIn = true;
-                    var_dump($user);
+                    return true;
                 } else {
                     $this->loggedIn = false;
                     $response["code"] = 3004;
@@ -57,14 +62,11 @@ class User {
                     return false;
                 }
             } else {
-                $this->loggedIn = false;
                 $response["code"] = 3001;
                 $response["content"] = "[SmartCMS] The session key is invalid!";
                 echo json_encode($response);
                 return false;
             }
-            $this->_session = $session;
-            return true;
         } else {
             $response["code"] = 3001;
             $response["content"] = "[SmartCMS] The session key is invalid!";
@@ -73,7 +75,7 @@ class User {
         }
     }
 
-    public function login($username = "", $password = "") {
+    public function login($username, $password) {
         if($username == "" || $password == "") {
             $response["code"] = 3003;
             $response["content"] = "[SmartCMS] Username and/or password empty!";
@@ -111,6 +113,10 @@ class User {
                 return false;
             }
         }
+    }
+
+    public function register() {
+
     }
 
     private function _encryptPassword($password, $salt) {
