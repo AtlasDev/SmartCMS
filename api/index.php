@@ -23,7 +23,7 @@ $_POST['session'] = "D4nwbCRukvjZaYyZhJXWN1lQgw39OuXP1CnlZ8aFiLEh3JH8RI";
 
 include("classes/functions.php");
 include("classes/classCombiner.php");
-header('Content-type: application/json');
+//header('Content-type: application/json');
 $response = array("code" => "", "content" => "");
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
@@ -45,7 +45,8 @@ if(empty($_POST['type'])) {
                         $theme = new Theme();
                         echo json_encode($theme->getMenu());
                     } else if ($_POST['type'] == "page") {
-                        
+                        $groups = new Group();
+                        var_dump($groups->getInheritance(3));
                     }
                 } else {
                     if(!isset($_POST["username"])) {
