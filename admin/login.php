@@ -9,13 +9,20 @@
         <link rel="stylesheet" href="css/bootstrap.css">
         <script type="text/javascript" src="js/jquery-2.1.1.js"></script>
         <script type="text/javascript" src="js/bootstrap.js"></script>
+        <script type="text/javascript" src="js/login.js"></script>
     </head>
-    <body>
+    <body class="loadwait">
+        <div id="loader-wrapper">
+            <div id="loader"></div>
+            <div id="loader-txt">Logging in..</div>
+            <div class="loader-section"></div>
+        </div>
         <div class="container-fluid">
             <div class="pane">
                 <h2>Admin area</h2>
                 <hr />
-                <form class="form-horizontal" role="form">
+                <div id="error">test</div>
+                <form class="form-horizontal" role="form" id="login">
                     <div class="form-group">
                         <label for="username" class="col-sm-2 control-label">Username</label>
                         <div class="col-sm-10">
