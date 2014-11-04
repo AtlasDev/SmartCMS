@@ -25,7 +25,7 @@ hr {
 }
 
 #error {
-    visibility: hidden;
+    display: none;
     border: 2px solid #ff0000;
     background-color: #FF3333;
     width: 100%;
