@@ -13,6 +13,7 @@
 **/
 
 class DB extends FlatFile {
+    private $_system;
     private $_connection;
     private $_DBusername;
     private $_DBpassword;
@@ -22,11 +23,10 @@ class DB extends FlatFile {
     private $_DBport;
 
     public function __construct() {
-        $response = array("code" => "", "content" => "");
+        global $system;
+        $this->_system = $system;
         if(PDO::getAvailableDrivers() == 0){
-            $response["code"] = 1003;
-            $response["content"] = "[SmartCMS] There were no drivers found!";
-            echo json_encode($response);
+            $this->_system->response(1003, "There were no drivers found!");
             return false;
         }
         $config = new FlatFile("db");
@@ -44,10 +44,7 @@ class DB extends FlatFile {
             return true;
         } catch (PDOException $e) {
             $code = $e->getCode();
-            $response["code"] = 1001;
-            $response["content"] = "[SmartCMS] MySQL returned an error on connecting! Error code: ".$code;
-            echo json_encode($response);
-            log_error("MySQL returned an error: ".$code);
+            $this->_system->response(1001, "MySQL returned an error on connecting! Error code: ".$code, true);
             return false;
         } 
     }
@@ -63,12 +60,8 @@ class DB extends FlatFile {
             }
             return $result;
         } catch (PDOException $e) {
-            echo $e;
             $code = $e->getCode();
-            $response["code"] = 1002;
-            $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;
-            echo json_encode($response);
-            log_error("MySQL returned an error: ".$code);
+            $this->_system->response(1002, "MySQL returned an error while executing a query! Error code: ".$code, true);
             return false;
         }
     }
@@ -80,10 +73,7 @@ class DB extends FlatFile {
             return $stmt->execute($prep);
         } catch (PDOException $e) {
             $code = $e->getCode();
-            $response["code"] = 1002;
-            $response["content"] = "[SmartCMS] MySQL returned an error while executing a query! Error code: ".$code;
-            echo json_encode($response);
-            log_error("MySQL returned an error: ".$code);
+            $this->_system->response(1002, "MySQL returned an error while executing a query! Error code: ".$code, true);
             return false;
         }
     }

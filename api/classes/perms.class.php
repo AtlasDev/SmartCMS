@@ -2,22 +2,23 @@
 
 /**
 
-  This is where the groups and permissions are handled
+  This is where the permissions and groups are being handled.
 
   Response codes:
 
-  ---
-  No response codes, only true, false or an array
-  ---
+  -- none --
 
 **/
 
-class Group {
+class Perms extends User {
     private $_conn;
+    private $_system;
 
     public function __construct() {
         global $conn;
+        global $system;
         $this->_conn = $conn;
+        $this->_system = $system;
     }
 
     public function hasPerm($group, $node) {

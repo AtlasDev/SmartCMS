@@ -11,13 +11,15 @@
 **/
 
 class Theme {
-
     private $_theme;
     private $_conn;
+    private $_system;
     
     public function __construct($theme = "") {
         global $conn;
+        global $system;
         $this->_conn = $conn;
+        $this->_system = $system;
         $this->_theme = $theme;
     }
 

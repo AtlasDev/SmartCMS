@@ -6,12 +6,13 @@
 
 **/
 
-include("flatfile.class.php");
-include("database.class.php");
-include("theme.class.php");
-include("user.class.php");
-include("lang.class.php");
-include("page.class.php");
-include("group.class.php");
+require_once("system.class.php");
+require_once("flatfile.class.php");
+require_once("database.class.php");
+require_once("theme.class.php");
+require_once("user.class.php");
+require_once("lang.class.php");
+require_once("page.class.php");
+require_once("perms.class.php");
 
 ?>

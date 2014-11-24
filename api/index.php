@@ -1,6 +1,6 @@
 <?php
 
-$_POST['type'] = "page";
+$_POST['type'] = "menu";
 $_POST['session'] = "D4nwbCRukvjZaYyZhJXWN1lQgw39OuXP1CnlZ8aFiLEh3JH8RI";
 
 /**
@@ -21,61 +21,41 @@ $_POST['session'] = "D4nwbCRukvjZaYyZhJXWN1lQgw39OuXP1CnlZ8aFiLEh3JH8RI";
 
 **/
 
-include("classes/functions.php");
-include("classes/classCombiner.php");
-//header('Content-type: application/json');
-$response = array("code" => "", "content" => "");
+require_once("classes/classCombiner.php");
+
+$conn = new DB();
+$system = new System();
+$user = new User();
+$perms = new Perms();
+$theme = new Theme();
+
+header('Content-type: application/json');
 header("Cache-Control: no-cache, must-revalidate");
 header("Expires: Sat, 26 Jul 1997 05:00:00 GMT");
 
-$types = array("menu", "page", "login");
+if(!empty($_POST['session'])) {
+    if(!$user->resume($_POST['session'])) {
+        die();
+    }
+}
 
 if(empty($_POST['type'])) {
-    $response["code"] = 1;
-    $response["content"] = "[SmartCMS] No request type defined!";
-    echo json_encode($response);
+    $system->response(1, "No request type defined!");
 } else {
-    if(in_array($_POST['type'], $types)) {
-        if(file_exists("config/installed")) {
-            $conn = new DB();
-            if($conn == true) {
-                $user = new User();
-                if($_POST["type"] != "login") {
-                    if($_POST['type'] == "menu") {
-                        $theme = new Theme();
-                        echo json_encode($theme->getMenu());
-                    } else if ($_POST['type'] == "page") {
-                        $groups = new Group();
-                        var_dump($groups->getInheritance(3));
-                    }
-                } else {
-                    if(!isset($_POST["username"])) {
-                        $_POST["username"] = "";
-                    }
-                    if(!isset($_POST["password"])) {
-                        $_POST["password"] = "";
-                    }
-                    $login = $user->login($_POST["username"], $_POST["password"]);
-                    if($login == false) {
-                        die();
-                    } else {
-                        $response["code"] = 0;
-                        $response["content"] = $login;
-                        echo json_encode($response);
-                    }
-                }
+    if(file_exists("config/installed")) {
+        if($conn == true) {
+            if($_POST["type"] == "login") {
+                $login = $user->login($_POST["username"], $_POST["password"]);
+            } else if($_POST['type'] == "menu") {
+                echo json_encode($theme->getMenu());
             } else {
-                die();
+                $system->response(4, "Request type not vailid!");
             }
         } else {
-            $response["code"] = 2;
-            $response["content"] = "[SmartCMS] This version of SmartCMS is not yet installed, please try again later!";
-            echo json_encode($response);
+            die();
         }
     } else {
-        $response["code"] = 4;
-        $response["content"] = "[SmartCMS] Request type not vailid!";
-        echo json_encode($response);
+        $system->response(2, "This version of SmartCMS is yet not installed, please try again later!");
     }
 }
 

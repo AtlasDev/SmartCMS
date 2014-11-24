@@ -14,6 +14,7 @@
 **/
 
 class User {
+    private $_system;
     private $_conn;
     private $_session;
     public $username;
@@ -28,9 +29,11 @@ class User {
 
     public function __construct() {
         global $conn;
+        global $system;
         $this->_conn = $conn;
+        $this->_system = $system;
         $this->loggedIn = false;
-        $this->group = false;
+        $this->group = 0;
     }
 
     public function resume($session) {
@@ -46,7 +49,7 @@ class User {
                 $this->registerIP = $user["registerIP"];
                 $this->registerDate = $user["registerDate"];
                 $time = time();
-                if($user["lastLogin"] >= $time - 3600) {
+                if($user["lastLogin"] >= $time - 1800) {
                     $ip = $_SERVER["REMOTE_ADDR"];
                     $this->lastLogin = $time;
                     $this->lastIP = $ip;
@@ -56,37 +59,29 @@ class User {
                     return true;
                 } else {
                     $this->loggedIn = false;
-                    $response["code"] = 3004;
-                    $response["content"] = "[SmartCMS] The session timed out!";
-                    echo json_encode($response);
+                    $this->_system->response(3004, "The session timed out!");
                     return false;
                 }
             } else {
-                $response["code"] = 3001;
-                $response["content"] = "[SmartCMS] The session key is invalid!";
-                echo json_encode($response);
+                $this->loggedIn = false;
+                $this->_system->response(3001, "The session key is invalid!");
                 return false;
             }
         } else {
-            $response["code"] = 3001;
-            $response["content"] = "[SmartCMS] The session key is invalid!";
-            echo json_encode($response);
+            $this->loggedIn = false;
+            $this->_system->response(3001, "The session key is invalid!");
             return false;
         }
     }
 
-    public function login($username, $password) {
+    public function login($username = "", $password = "") {
         if($username == "" || $password == "") {
-            $response["code"] = 3003;
-            $response["content"] = "[SmartCMS] Username and/or password empty!";
-            echo json_encode($response);
+            $this->_system->response(3003, "Username and/or password empty!");
             return false;
         } else {
             $result = $this->_conn->select("SELECT * FROM {prefix}users WHERE username = :username", array(":username" => $username));
             if(!isset($result[0])) {
-                $response["code"] = 3002;
-                $response["content"] = "[SmartCMS] Login credentials invalid!";
-                echo json_encode($response);
+                $this->_system->response(3002, "Login credentials are invalid!");
                 return false;
             }
             $user = $result[0];
@@ -105,11 +100,9 @@ class User {
                 $prep = array(':sessionID' => $this->_session, ':lastLogin' => $time, 'lastIP' => $ip , ':id' => $user["id"]);
                 $this->_conn->query("UPDATE {prefix}users SET sessionID = :sessionID, lastLogin = :lastLogin, lastIP = :lastIP WHERE id = :id", $prep);
                 $this->loggedIn = true;
-                return $this->_session;
+                $this->_system->response(0, $this->_session);
             } else {
-                $response["code"] = 3002;
-                $response["content"] = "[SmartCMS] Login credentials invalid!";
-                echo json_encode($response);
+                $this->_system->response(3002, "Login credentials are invalid!");
                 return false;
             }
         }

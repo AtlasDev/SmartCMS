@@ -4,5 +4,5 @@
     "database": "smartcms",
     "prefix": "smartcms_",
     "username": "root",
-    "password": "root"
+    "password": ""
 }
